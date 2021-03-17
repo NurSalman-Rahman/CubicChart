@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         //Data Set Show in Line Chart
         lineChart.setData(datas);
 
-        lineChart.animateXY(5000,3000);
+        lineChart.animateXY(10000,8000);
 
         //lineChart.animateX(5000);   // best
 
