@@ -7,13 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 
 import com.example.cubicchart.Database.database;
 import com.example.cubicchart.Model.BarChart;
 import com.example.cubicchart.Model.MyAdeptarBarchart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editText1,editText2,editText3;
     Button Savebutton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             editText1 .setText("");
             editText2 .setText("");
             editText3 .setText("");
-           lineChart.notifyDataSetChanged();
+
         }
     }
 
@@ -85,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             {
 
                 intInputCheck();
+                lineChart.notifyDataSetChanged();
+
             }
         });
     }
@@ -115,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewBar.setLayoutManager(layoutManager);
 
+
     }
 
 
@@ -139,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             lineChartList.add(value);
 
 
+
         }
 
 
@@ -153,6 +162,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewBar.setAdapter(adeptarBarchart);
         lineChartFunction();
+        lineChart.notifyDataSetChanged();
+
+
 
     }
 
@@ -185,12 +197,18 @@ public class MainActivity extends AppCompatActivity {
         set1.setDrawCircles(true);
         set1.setLineWidth(.5f);
         set1.setCircleRadius(.2f);
+      //  set1.setCircleRadius(30f);
         set1.setCircleColor(Color.BLACK);
         //set1.setHighLightColor(Color.rgb(244, 117, 117));
         set1.setColor(Color.RED);
         set1.setFillColor(Color.GREEN);
-        set1.setFillAlpha(100);
-        //set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setFillAlpha(1000);
+        set1.setVisible(true);
+
+
+
+
+
 
 
 
@@ -202,18 +220,26 @@ public class MainActivity extends AppCompatActivity {
         LineData datas = new LineData(dataSets);
 
         datas.setValueTextSize(6f);
+
         datas.setDrawValues(true);
         datas.setValueTextColor(Color.RED);
         datas.setDrawValues(true);
 
 
+
+
+
         //Data Set Show in Line Chart
         lineChart.setData(datas);
 
-        lineChart.animateXY(10000,8000);
+       lineChart.animateXY(2000,2000);
 
-        //lineChart.animateX(5000);   // best
 
+
+         //  This Line Is Cubic Chart Horizontal Scrool
+        // per page min 1 data , max 4 ta show
+        lineChart.setVisibleXRange(1,4);
+        lineChart.notifyDataSetChanged();
 
 
 
@@ -236,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         db.close();
+
+
 
 
 
